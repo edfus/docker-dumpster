@@ -28,7 +28,7 @@ function port0 {
 read -e -p "$(echo -e "${RED}*${RST}") Enter the webSocket pathname: " -i "/$RANDOM.m3u8" VAR_WS_PATH
 read -e -p "$(echo -e "${RED}*${RST}") Enter the port to be listened: " -i "$(port0)" VAR_PORT
 read -e -p "- Enter the log storage location: " -i "/var/log/v2ray" VAR_LOG_PATH
-read -e -p "- Enter the alter id (see v2ray issues/518): " -i "$(($RANDOM % 255))" VAR_ALTER_ID
+read -e -p "- Enter the alter id (see v2ray issues/518): " -i "$(($RANDOM % 255 + 20))" VAR_ALTER_ID
 read -e -p "- Enter the uuid: " -i "$(uuidgen)" VAR_UUID
 
 echo -e "${CYAN}V2ray config path: ${JSON_PATH}${RST}"
@@ -122,10 +122,6 @@ readonly PASSWORD=$(uuidgen)
 # readonly PASSWD_HASHED=$(htpasswd -bnBC 10 "" "${PASSWORD}" | tr -d ':\n')
 # readonly PASSWD_HASHED_BASE64=$(echo "${PASSWD_HASHED}" | base64)
 readonly PASSWD_HASHED_BASE64=$(caddy hash-password --plaintext "$PASSWORD")
-
-echo $PASSWORD
-echo $PASSWD_HASHED
-echo $PASSWD_HASHED_BASE64
 
 cat >${CADDY_FILE_PATH}/Caddyfile <<EOF
 ${VAR_DOMAIN} {

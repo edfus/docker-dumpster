@@ -1,0 +1,1 @@
+{"location":"/var/www","hostname":"0.0.0.0","port":12345,"logPath":"../logs","notTLS":true,"isAuthEnabled":true,"username":"seiran","password":false,"auth":["/upload"],"comfirmed_password":false}

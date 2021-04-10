@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  file_server:
+    build:
+      context: ./server
+    restart: on-failure
+    environment:
+      SECRET: file_server_passwd
+    secrets:
+      - file_server_passwd
+    volumes:
+      - ${pwd}/assets/:/var/www/
+    networks: 
+      - tornetwork
+  tor:
+    restart: on-failure
+    build:
+      context: ./tor
+    networks:
+      - tornetwork
+
+networks: 
+  tornetwork:
+
+secrets:
+  file_server_passwd:
+    file: ./secrets/file_server_passwd
